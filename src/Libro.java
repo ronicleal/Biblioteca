@@ -31,7 +31,35 @@ public String getTitulo(){
     return this.titulo;
 }
 
+public String getAutor(){
+    return this.autor;
+}
 
+public String getCategoria(){
+    return this.categoria;
+}
+
+public boolean getPrestado(){
+    return this.prestado;
+}
+
+/*SETTERS */
+
+public void setTitulo(String titulo){
+    this.titulo=titulo;
+}
+
+public void setAutor(String autor){
+    this.autor=autor;
+}
+
+public void setCategoria(String categoria){
+    this.categoria=categoria;
+}
+
+public void setPrestado(boolean prestado){
+    this.prestado=prestado;
+}
 
     
 }
