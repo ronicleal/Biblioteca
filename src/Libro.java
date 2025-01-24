@@ -25,6 +25,12 @@ Libro(String titulo, String autor, String categoria, boolean prestado){
     this.prestado=prestado;
 }
 
+/*GETTERS */
+
+public String getTitulo(){
+    return this.titulo;
+}
+
 
 
     
