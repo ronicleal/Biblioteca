@@ -61,5 +61,9 @@ public void setPrestado(boolean prestado){
     this.prestado=prestado;
 }
 
+
+
+public String toString(){
+    return "Titulo: " + titulo + ", Autor: " + autor + ", Categoria: " + categoria + ", Prestado " + prestado;}
     
 }
