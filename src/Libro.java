@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Libro {
     /*Agregar libros nuevos.(admin)
 Eliminar libros existentes.(admin)
@@ -7,22 +9,24 @@ Mostrar todos los libros disponibles.(todos) */
 private String titulo;
 private String autor;
 private String categoria;
-private boolean prestado;
 
+
+/*CONSTRUCTOR POR DEFECTO */
 
 Libro(){
     titulo="";
     autor="";
     categoria="";
-    prestado=false;
+   
 
 }
+/*CONSTRUCTOR PARAMETRIZADO */
 
-Libro(String titulo, String autor, String categoria, boolean prestado){
+Libro(String titulo, String autor, String categoria){
     this.titulo=titulo;
     this.autor=autor;
     this.categoria=categoria;
-    this.prestado=prestado;
+   
 }
 
 /*GETTERS */
@@ -39,9 +43,7 @@ public String getCategoria(){
     return this.categoria;
 }
 
-public boolean getPrestado(){
-    return this.prestado;
-}
+
 
 /*SETTERS */
 
@@ -57,13 +59,37 @@ public void setCategoria(String categoria){
     this.categoria=categoria;
 }
 
-public void setPrestado(boolean prestado){
-    this.prestado=prestado;
-}
 
 
-
+/*MOSTRAR LIBROS */
+@Override
 public String toString(){
-    return "Titulo: " + titulo + ", Autor: " + autor + ", Categoria: " + categoria + ", Prestado " + prestado;}
+    return "Titulo: " + titulo + ", Autor: " + autor + ", Categoria: " + categoria;}
+   
     
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
