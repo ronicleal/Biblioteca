@@ -19,7 +19,7 @@ public class Usuario {
 
     }
 
-    Usuario(String nombre, String correo, String password, boolean rolAdministrador) {
+    Usuario(String nombre, String password, boolean rolAdministrador) {
         this.nombre = nombre;
         this.password = password;
         this.rolAdministrador = rolAdministrador;
