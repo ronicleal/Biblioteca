@@ -4,14 +4,17 @@ import java.util.Scanner;
 
 public class Biblioteca {
     /*Atributos */
-    private ArrayList<Libro> libros;
-    private ArrayList<Usuario> usuarios;
+    private Libro[]Libros;
+    private Usuario[]Usuario;
+    private int tamLibro=;
+    private int tamUsuario=0;
  
 
    /*CONTRUCTOR POR DEFECTO */
     Biblioteca(){
-        libros = new ArrayList<>();
-        usuarios = new ArrayList<>();
+        Libros= new Libro[tamLibro];
+        Usuario= new Usuario[tamUsuario];
+        
 
     }
 
