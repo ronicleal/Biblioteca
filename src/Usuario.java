@@ -93,6 +93,8 @@ public class Usuario {
             
         }
 
+        //porque tengo que poner (usuario admin) y !admin.rolAdministrador en un void... y no me deja poner el metodo en BOOLEAN igual que el de registrar usuario???
+
         System.out.println("Lista de usuarios registrados: ");
         for (int i = 0; i < contadorUsuarios; i++) {
             Usuario usuario = usuariosRegistrados[i]; //en esta linea he necesitado ayuda
