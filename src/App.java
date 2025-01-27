@@ -47,6 +47,7 @@ El proyecto incluirá bajo una etiqueta de tipo @author el nombre de los partici
 En la entrega se añadirá un enlace al repositorio (deberá ser público). */
 
 public class App {
+    
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
     }
