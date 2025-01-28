@@ -1,15 +1,16 @@
+import java.util.Scanner;
+
 /**
-     * 
-     * @autor diego
-     */
+ * 
+ * @autor diego
+ */
 public class Usuario {
     private String nombre;
     private String password;
     private boolean rolAdministrador;
-    private Libro [] librosPrestados;
+    private Libro[] librosPrestados;
     private int tamPrestamos = 5;
     private int contadorLibros = 0;
-
 
     Usuario() {
         this.nombre = " ";
@@ -26,12 +27,11 @@ public class Usuario {
 
     }
 
-    
     public String getNombre() {
 
         return this.nombre;
     }
-    
+
     public String getPassword() {
 
         return this.password;
@@ -45,7 +45,7 @@ public class Usuario {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -54,98 +54,119 @@ public class Usuario {
         this.rolAdministrador = rolAdministrador;
     }
 
-    public Libro[] getLibrosPrestados(){
+    public Libro[] getLibrosPrestados() {
         return librosPrestados;
 
-
     }
 
-// metodo creado para que cuando llamemos a usuario le metamos los libros prestados al usuario
-    public void prestarLibro(Libro libroPrestado ){
-if (this.contadorLibros < this.librosPrestados.length){
+    // metodo creado para que cuando llamemos a usuario le metamos los libros
+    // prestados al usuario
+    public void prestarLibro(Libro libroPrestado) {
+        if (this.contadorLibros < this.librosPrestados.length) {
 
-    for(int i=0; i<librosPrestados.length; i++ ){
+            for (int i = 0; i < librosPrestados.length; i++) {
 
-        if(librosPrestados[i]== null){
-            librosPrestados[i] = libroPrestado;
-            librosPrestados[i].setPrestado(true);
-            this.contadorLibros++;
-            break; //¿Por qué ponemos break en esta sentencia? ¿De qué otra manera se podría haber hecho?
+                if (librosPrestados[i] == null) {
+                    librosPrestados[i] = libroPrestado;
+                    librosPrestados[i].setPrestado(true);
+                    this.contadorLibros++;
+                    break; // ¿Por qué ponemos break en esta sentencia? ¿De qué otra manera se podría haber
+                           // hecho?
+                }
+
+            }
+        } else {
+
+            System.out.println("No puedes llevarte mas libros");
         }
-
-
-    }
-}else{
-
-    System.out.println("No puedes llevarte mas libros");
-}
-        
 
     }
 
     public boolean devolverLibro(Libro libroPrestado) {
-        boolean comprobarDevolucion=false;
-        for(int i=0; i<librosPrestados.length; i++){
-            //¿Por qué comparamos si NO está vacío?
+        boolean comprobarDevolucion = false;
+        for (int i = 0; i < librosPrestados.length; i++) {
+            // ¿Por qué comparamos si NO está vacío?
             if (librosPrestados[i] != null && librosPrestados[i].getTitulo().equals(libroPrestado.getTitulo())) {
                 librosPrestados[i].setLibrosPrestados(false);
                 this.contadorLibros--;
-                librosPrestados[i]=null;
-                comprobarDevolucion=true;
+                librosPrestados[i] = null;
+                comprobarDevolucion = true;
                 for (int j = i; j < librosPrestados.length - 1; j++) {
                     librosPrestados[j] = librosPrestados[j + 1];
                 }
-    
-                // Asegurar que la última posición sea null
+
                 librosPrestados[librosPrestados.length - 1] = null;
-            break;
+                break;
             }
         }
         return comprobarDevolucion;
     }
 
+    public static Usuario registrarUsuario() {
+        Scanner sc = new Scanner(System.in);
 
+        String nombre;
+        String password;
+        String confirmPassword;
+        boolean esAdministrador;
 
+        System.out.println("Registro de usuario");
 
-    // no entiendo porque tengo que registrar desde administrador... un usuario no deberia poder hacerlo por su cuenta???
-    
-    // public static boolean registrarUsuario(String nombre, String correo, String password, boolean rolAdministrador) {
+        System.out.print("Nombre de usuario: ");
+        nombre = sc.nextLine();
 
-    //     if (!rolAdministrador) {
-    //         System.out.println("Acceso denegado, tienes que ser administrador");
-    //         return false;
+        System.out.print("Ingresa contraseña: ");
+        password = sc.nextLine();
 
-    //     } else {
+        System.out.print("Confirma contraseña: ");
+        confirmPassword = sc.nextLine();
 
-    //         //No lo he hecho yo
+        if (!password.equals(confirmPassword)) {
+            System.out.println("No coincide esta contraseña, prueba de nuevo.");
+        } else {
+            System.out.println("contraseña guardada");
+        }
+        System.out.print("¿Es usted administrador? (S/N): ");
+        String respuesta = sc.nextLine();
 
-    //         Usuario nuevoUsuario = new Usuario(nombre, correo, password, rolAdministrador);
-    //         usuariosRegistrados[contadorUsuarios] = nuevoUsuario;
-    //         contadorUsuarios++;
+        if (respuesta.equals("S")) {
+            esAdministrador = true;
+            System.out.println("Registrado como administrador.");
+        } else {
+            esAdministrador = false;
+            System.out.println("Registrado como usuario.");
+        }
 
-    //         //Hasta aqui
-    //         System.out.println("Usuario registrado con exito");
-    //         return true;
+        Usuario nuevoUsuario = new Usuario(nombre, password, esAdministrador);
 
-    //     }
+        System.out.println("Registro completado con exito.");
+        return nuevoUsuario;
+    }
 
-    // }
+    // Metodo para agregar usuario DESDE ADMINISTRADOR
+    public static Usuario agregarUsuarioDesdeAdmin() {
+        Scanner sc = new Scanner(System.in);
 
-    
-    // public static void consultarUsuariosRegistrados(Usuario admin) {
-      
-    //     if (!admin.rolAdministrador) {
-    //         System.out.println("Acceso denegado, tienes que ser administrador");
-            
-    //     }
+        String nombre;
+        String respuesta;
+        String password;
+        boolean rolAdministrador;
 
-    //     //porque tengo que poner (usuario admin) y !admin.rolAdministrador en un void... y no me deja poner el metodo en BOOLEAN igual que el de registrar usuario???
+        System.out.println("Agregar nuevo usuario");
 
-    //     System.out.println("Lista de usuarios registrados: ");
-    //     for (int i = 0; i < contadorUsuarios; i++) {
-    //         Usuario usuario = usuariosRegistrados[i]; //en esta linea he necesitado ayuda
-    //         System.out.println("Nombre: " + usuario.nombre + ", Correo: " + usuario.correo + ", Rol: " //me daba error y buscando en internet me ha puesto "usuario.nombre etc"
-    //                 + (usuario.rolAdministrador ? "Administrador" : "Usuario"));
-    //     }
-    // }
+        System.out.print("Dime el nombre del usuario: ");
+        nombre = sc.nextLine();
+
+        System.out.print("Dime la contraseña del usuario: ");
+        password = sc.nextLine();
+
+        System.out.print("¿Es administrador? (S/N): ");
+        respuesta = sc.nextLine();
+        rolAdministrador = (respuesta.charAt(0) == 'S');
+
+        Usuario nuevoUsuario = new Usuario(nombre, password, rolAdministrador);
+
+        System.out.println("Usuario agregado.");
+        return nuevoUsuario;
+    }
 }
