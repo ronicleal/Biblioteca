@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Biblioteca {
     /*Atributos */
     private Libro[]Libros;
-    private Usuario2[]Usuario;
+    private Usuario[]Usuario;
     private int tamLibro=50;
     private int tamUsuario=50;
     private int contadorLibros;
@@ -14,7 +14,7 @@ public class Biblioteca {
    /*CONTRUCTOR POR DEFECTO */
     Biblioteca(){
         Libros= new Libro[tamLibro];
-        Usuario= new Usuario2[tamUsuario];
+        Usuario= new Usuario[tamUsuario];
         contadorLibros=0;
         
 
@@ -24,7 +24,7 @@ public class Biblioteca {
         this.tamLibro=tamLibro;
         this.tamUsuario=tamUsuario;
         Libros=new Libro[tamLibro];
-        Usuario=new Usuario2[tamUsuario];
+        Usuario=new Usuario[tamUsuario];
     }
 
     /*GETTERS */
@@ -33,7 +33,7 @@ public class Biblioteca {
         return Libros;
     }
 
-    public Usuario2[] getUsuarios(){
+    public Usuario[] getUsuarios(){
         return Usuario;
     }
 
@@ -51,7 +51,7 @@ public class Biblioteca {
         this.Libros=libros;
     }
 
-    public void setUsuarios(Usuario2[] usuarios){
+    public void setUsuarios(Usuario[] usuarios){
         this.Usuario=usuarios;
     }
 
@@ -62,7 +62,7 @@ public class Biblioteca {
 
     public void settamUsuario(int tamUsuario){
         this.tamUsuario=tamUsuario;
-        Usuario= new Usuario2[tamUsuario];
+        Usuario= new Usuario[tamUsuario];
     }
 
 
@@ -135,13 +135,32 @@ public class Biblioteca {
        
     }
 
+    public void mostrarLibros(String titulo, String autor, String categoria){
 
+    boolean hayLibros= false;
 
+    System.out.println("Lista de libros en la colección: ");
+    for(int i=0; i<tamLibro;i++){
+        if(Libros[i] !=null){
+            System.out.println("Titulo: " + Libros[i].getTitulo());
+            System.out.println("Autor: " + Libros[i].getAutor());
+            System.out.println("Categoria " + Libros[i].getCategoria());
+            System.out.println("-------------------------------------");
+            hayLibros=true;
+        }
+    }
     
+    if(!hayLibros){
+        System.out.println("No hay libros en la colección");
+    }
 
 
+    }
 
 }
+
+
+   
 
 
 
