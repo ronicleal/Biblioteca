@@ -139,7 +139,7 @@ public class Usuario {
 
         Usuario nuevoUsuario = new Usuario(nombre, password, esAdministrador);
 
-        System.out.println("Registro completado con exito.");
+        System.out.println("Registro realizado.");
         return nuevoUsuario;
     }
 
