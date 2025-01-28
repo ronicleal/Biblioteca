@@ -70,14 +70,7 @@ public class Biblioteca {
 
     public void agrearLibro(Libro libro){
 
-        // if(contadorLibros < Libros.length){
-        //     Libros[contadorLibros] = libro;
-        //     contadorLibros++;
-
-        // }else{
-        //     System.out.println("No se puede agregar mas libros");
-
-        // }
+        
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca el titulo del libro: ");
         String titulo= sc.nextLine();

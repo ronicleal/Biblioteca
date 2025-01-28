@@ -1,18 +1,18 @@
-public class Usuario2 {
+public class Usuario {
  String nombre;
  String password;
  boolean rol;
  
 
 
-    Usuario2(){
+    Usuario(){
         nombre="";
         password="";
         rol=true;
 
     }
 
-    Usuario2(String nombre, String password, boolean rol){
+    Usuario(String nombre, String password, boolean rol){
         this.nombre=nombre;
         this.password=password;
         this.rol=rol;
