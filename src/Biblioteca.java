@@ -5,66 +5,143 @@ import java.util.Scanner;
 public class Biblioteca {
     /*Atributos */
     private Libro[]Libros;
-    private Usuario[]Usuario;
-    private int tamLibro=;
-    private int tamUsuario=0;
+    private Usuario2[]Usuario;
+    private int tamLibro=50;
+    private int tamUsuario=50;
+    private int contadorLibros;
  
 
    /*CONTRUCTOR POR DEFECTO */
     Biblioteca(){
         Libros= new Libro[tamLibro];
-        Usuario= new Usuario[tamUsuario];
+        Usuario= new Usuario2[tamUsuario];
+        contadorLibros=0;
         
 
     }
 
+    Biblioteca(int tamLibro, int tamUsuario){
+        this.tamLibro=tamLibro;
+        this.tamUsuario=tamUsuario;
+        Libros=new Libro[tamLibro];
+        Usuario=new Usuario2[tamUsuario];
+    }
+
+    /*GETTERS */
+
+    public Libro[] getLibros(){
+        return Libros;
+    }
+
+    public Usuario2[] getUsuarios(){
+        return Usuario;
+    }
+
+    public int gettamLibro(){
+        return tamLibro;
+    }
+
+    public int gettamUsuario(){
+        return tamUsuario;
+    }
+
+    /*SETTERS */
+
+    public void setLibros(Libro[] libros){
+        this.Libros=libros;
+    }
+
+    public void setUsuarios(Usuario2[] usuarios){
+        this.Usuario=usuarios;
+    }
+
+    public void settamLibro(int tamLibro){
+        this.tamLibro=tamLibro;
+        Libros= new Libro[tamLibro];
+    }
+
+    public void settamUsuario(int tamUsuario){
+        this.tamUsuario=tamUsuario;
+        Usuario= new Usuario2[tamUsuario];
+    }
+
+
     /*METODOS */
 
-    public void agrearLibro(){
+    public void agrearLibro(Libro libro){
+
+        // if(contadorLibros < Libros.length){
+        //     Libros[contadorLibros] = libro;
+        //     contadorLibros++;
+
+        // }else{
+        //     System.out.println("No se puede agregar mas libros");
+
+        // }
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca el titulo del libro: ");
         String titulo= sc.nextLine();
 
-        System.out.println("Introduce el autor del libro: ");
-        String autor=sc.nextLine();
+        System.out.println("Introduce el autor del libro:");
+        String autor= sc.nextLine();
 
-        System.out.println("Introduce la categoria del libro: ");
-        String categoria=sc.nextLine();
+        System.out.println("Introduce la categoria del libro:");
+        String categoria= sc.nextLine();
 
-        libros.add(new Libro(titulo, autor, categoria));
-        System.out.println("¡Libro agregado exitosamente!");
-
-
-
-    }
-
-    public void eliminarLibro(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Introduzca el nombre del libro a eliminar: ");
-        String titulo= sc.nextLine();
-        
-        if(libros.equals(titulo)){
-            libros.remove(titulo);/*removeIf eliminina si el libro conincide con el titulo, el removeIf es como un booleano que elimina si encuentra la conicidencia */
-            System.out.println("Libro eliminado");
-        }
-         
-       
-    }
-
-    public void mostrarLibros(){
-
-        if(libros.isEmpty()){/*el isEmpty verifica si el arraylibros esta vacio, es un metodo de clase Colletion(Clase reservada) */
-            System.out.println("No hay libros disponibles");
-
-        }else{
-            for(int i=0; i<libros.size();i++){
-                System.out.println(libros.get(i));/*mostramos los libros que hay en el array */
+        for(int i=0; i<tamLibro;i++){
+            if(Libros[i] != null && Libros[i].getTitulo().equals(titulo)){
+                System.out.println("El libro ya existe en la colección");
+                return;
             }
         }
 
+        for(int i=0; i<tamLibro;i++){
+           if(Libros[i]==null && Libros.length > contadorLibros){
+            Libros[i]=libro;
+            System.out.println("Libro agregado exitosamente!");
+            contadorLibros++;
+            return;
+           }
+        }
+
+        System.out.println("No hay espacio para agregar mas libros.");
+
+
+    }
+
+    public void eliminarLibro(String titulo){
+        boolean encontrado=false;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduzca el nombre del libro a eliminar: ");
+        titulo= sc.nextLine();
+
+        for(int i=0;i<tamLibro;i++){
+            if(Libros[i]!=null && Libros[i].getTitulo().equals(titulo)){
+                Libros[i]=null;
+                System.out.println("El libro " + titulo + "ha sido eliminado");
+                encontrado=false;
+                break;
+            }
+        }
+
+        if(!encontrado){
+            System.out.println("El libro " + titulo + "no se encontró en la colección ");
+        }
+
+
+        
+        
+       
     }
 
 
+
+    
+
+
+
 }
+
 
 
