@@ -11,6 +11,7 @@ public class Usuario {
     private Libro[] librosPrestados;
     private int tamPrestamos = 5;
     private int contadorLibros = 0;
+    private int librosEnCesta = 0;
 
     Usuario() {
         this.nombre = " ";
@@ -169,4 +170,15 @@ public class Usuario {
         System.out.println("Usuario agregado.");
         return nuevoUsuario;
     }
+
+    /*Menú de inicio o registro y si inicias con administrador 
+    tener el menú de agregar libros a la Biblioteca o prestar libros
+
+    Y si inicias con un usuario que salga menú de devolver  libros y agregar 
+    libros a mi cesta */
+
+
+
 }
+
+
