@@ -27,7 +27,7 @@ public class Biblioteca {
         Usuario=new Usuario[tamUsuario];
     }
 
-    /*GETTERS */
+    
 
     public Libro[] getLibros(){
         return Libros;
@@ -45,7 +45,7 @@ public class Biblioteca {
         return tamUsuario;
     }
 
-    /*SETTERS */
+    
 
     public void setLibros(Libro[] libros){
         this.Libros=libros;
@@ -66,7 +66,7 @@ public class Biblioteca {
     }
 
 
-    /*METODOS */
+    
 
     public void agrearLibro(Libro libro){
 
@@ -132,7 +132,7 @@ public class Biblioteca {
 
     boolean hayLibros= false;
 
-    System.out.println("Lista de libros en la colección: ");
+    System.out.println("Lista de libros: ");
     for(int i=0; i<tamLibro;i++){
         if(Libros[i] !=null){
             System.out.println("Titulo: " + Libros[i].getTitulo());
