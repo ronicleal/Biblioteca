@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class App {
+public class App  {
     /**
      * @autor Diego y Ronic
      * @param args
