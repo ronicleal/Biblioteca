@@ -1,151 +1,91 @@
+import java.util.Scanner;
+
 /**
-     * 
-     * @autor diego
-     */
+ * 
+ * @autor Diego
+ */
+
 public class Usuario {
     private String nombre;
-    private String password;
-    private boolean rolAdministrador;
-    private Libro [] librosPrestados;
-    private int tamPrestamos = 5;
-    private int contadorLibros = 0;
+    private String contrasena;
+    private String rol; 
+    private Libro[] librosPrestados;
+    private int numLibrosPrestados;
 
-
-    Usuario() {
-        this.nombre = " ";
-        this.password = " ";
-        this.rolAdministrador = true;
-        this.librosPrestados = new Libro[tamPrestamos];
-
-    }
-
-    Usuario(String nombre, String correo, String password, boolean rolAdministrador) {
+    public Usuario(String nombre, String contrasena, String rol) {
         this.nombre = nombre;
-        this.password = password;
-        this.rolAdministrador = rolAdministrador;
-
+        this.contrasena = contrasena;
+        this.rol = rol;
+        this.librosPrestados = new Libro[100]; 
+        this.numLibrosPrestados = 0;
     }
 
     
     public String getNombre() {
-
-        return this.nombre;
-    }
-    
-    public String getPassword() {
-
-        return this.password;
+        return nombre;
     }
 
-    public boolean getRolAdministrador() {
-
-        return this.rolAdministrador;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
+    public String getRol() {
+        return rol;
     }
 
-    public void setRolAdministrador(boolean rolAdministrador) {
-        this.rolAdministrador = rolAdministrador;
-    }
-
-    public Libro[] getLibrosPrestados(){
+    public Libro[] getLibrosPrestados() {
         return librosPrestados;
-
-
     }
 
-// metodo creado para que cuando llamemos a usuario le metamos los libros prestados al usuario
-    public void prestarLibro(Libro libroPrestado ){
-if (this.contadorLibros < this.librosPrestados.length){
-
-    for(int i=0; i<librosPrestados.length; i++ ){
-
-        if(librosPrestados[i]== null){
-            librosPrestados[i] = libroPrestado;
-            librosPrestados[i].setPrestado(true);
-            this.contadorLibros++;
-            break; //¿Por qué ponemos break en esta sentencia? ¿De qué otra manera se podría haber hecho?
+    
+    public static int registrarUsuario(Usuario[] usuarios, int cantidadUsuarios, Usuario usuario) {
+        if (cantidadUsuarios < usuarios.length) {
+            usuarios[cantidadUsuarios] = usuario;
+            System.out.println("Usuario registrado: " + usuario.getNombre());
+            return cantidadUsuarios + 1;
+        } else {
+            System.out.println("No hay espacio para más usuarios.");
+            return cantidadUsuarios;
         }
-
-
-    }
-}else{
-
-    System.out.println("No puedes llevarte mas libros");
-}
-        
-
     }
 
-    public boolean devolverLibro(Libro libroPrestado) {
-        boolean comprobarDevolucion=false;
-        for(int i=0; i<librosPrestados.length; i++){
-            //¿Por qué comparamos si NO está vacío?
-            if (librosPrestados[i] != null && librosPrestados[i].getTitulo().equals(libroPrestado.getTitulo())) {
-                librosPrestados[i].setLibrosPrestados(false);
-                this.contadorLibros--;
-                librosPrestados[i]=null;
-                comprobarDevolucion=true;
-                for (int j = i; j < librosPrestados.length - 1; j++) {
+    public static void consultarUsuarios(Usuario[] usuarios, int numUsuarios) {
+        for (int i = 0; i < numUsuarios; i++) {
+            System.out.println("Usuario: " + usuarios[i].getNombre() + " - Rol: " + usuarios[i].getRol());
+        }
+    }
+
+    
+    public void prestarLibro(Libro libro) {
+        if (libro.isDisponible() && numLibrosPrestados < librosPrestados.length) {
+            librosPrestados[numLibrosPrestados++] = libro;
+            libro.setDisponible(false);
+            System.out.println("Préstamo realizado: " + libro.getTitulo());
+        } else {
+            System.out.println("El libro no está disponible o has alcanzado el límite de préstamos.");
+        }
+    }
+
+    public void devolverLibro(Libro libro) {
+        boolean encontrado = false;
+        for (int i = 0; i < numLibrosPrestados; i++) {
+            if (librosPrestados[i] == libro) {
+                
+                for (int j = i; j < numLibrosPrestados - 1; j++) {
                     librosPrestados[j] = librosPrestados[j + 1];
                 }
-    
-                // Asegurar que la última posición sea null
-                librosPrestados[librosPrestados.length - 1] = null;
-            break;
+                numLibrosPrestados--;
+                libro.setDisponible(true);
+                System.out.println("Devolución realizada: " + libro.getTitulo());
+                encontrado = true;
+                break;
             }
         }
-        return comprobarDevolucion;
+        if (!encontrado) {
+            System.out.println("El libro no pertenece a tus préstamos.");
+        }
     }
 
 
-
-
-    // no entiendo porque tengo que registrar desde administrador... un usuario no deberia poder hacerlo por su cuenta???
     
-    // public static boolean registrarUsuario(String nombre, String correo, String password, boolean rolAdministrador) {
-
-    //     if (!rolAdministrador) {
-    //         System.out.println("Acceso denegado, tienes que ser administrador");
-    //         return false;
-
-    //     } else {
-
-    //         //No lo he hecho yo
-
-    //         Usuario nuevoUsuario = new Usuario(nombre, correo, password, rolAdministrador);
-    //         usuariosRegistrados[contadorUsuarios] = nuevoUsuario;
-    //         contadorUsuarios++;
-
-    //         //Hasta aqui
-    //         System.out.println("Usuario registrado con exito");
-    //         return true;
-
-    //     }
-
-    // }
-
-    
-    // public static void consultarUsuariosRegistrados(Usuario admin) {
-      
-    //     if (!admin.rolAdministrador) {
-    //         System.out.println("Acceso denegado, tienes que ser administrador");
-            
-    //     }
-
-    //     //porque tengo que poner (usuario admin) y !admin.rolAdministrador en un void... y no me deja poner el metodo en BOOLEAN igual que el de registrar usuario???
-
-    //     System.out.println("Lista de usuarios registrados: ");
-    //     for (int i = 0; i < contadorUsuarios; i++) {
-    //         Usuario usuario = usuariosRegistrados[i]; //en esta linea he necesitado ayuda
-    //         System.out.println("Nombre: " + usuario.nombre + ", Correo: " + usuario.correo + ", Rol: " //me daba error y buscando en internet me ha puesto "usuario.nombre etc"
-    //                 + (usuario.rolAdministrador ? "Administrador" : "Usuario"));
-    //     }
-    // }
 }

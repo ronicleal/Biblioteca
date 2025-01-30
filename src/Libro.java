@@ -1,95 +1,80 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Libro {
-    /*Agregar libros nuevos.(admin)
-Eliminar libros existentes.(admin)
-Buscar libros por título, autor o categoría.(todos)
-Mostrar todos los libros disponibles.(todos) */
+    private String titulo;
+    private String autor;
+    private String categoria;
+    private boolean disponible;
 
-private String titulo;
-private String autor;
-private String categoria;
+    public Libro(String titulo, String autor, String categoria) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.categoria = categoria;
+        this.disponible = true; 
+    }
 
+    public String getTitulo() {
+        return titulo;
+    }
 
-/*CONSTRUCTOR POR DEFECTO */
+    public String getAutor() {
+        return autor;
+    }
 
-Libro(){
-    titulo="";
-    autor="";
-    categoria="";
-   
+    public String getCategoria() {
+        return categoria;
+    }
 
-}
-/*CONSTRUCTOR PARAMETRIZADO */
+    public boolean isDisponible() {
+        return disponible;
+    }
 
-Libro(String titulo, String autor, String categoria){
-    this.titulo=titulo;
-    this.autor=autor;
-    this.categoria=categoria;
-   
-}
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
 
-/*GETTERS */
+    public static int agregarLibro(Libro[] libros, int cantidadLibros, Libro libro) {
+        if (cantidadLibros < libros.length) {
+            libros[cantidadLibros] = libro;
+            System.out.println("Libro agregado: " + libro.getTitulo());
+            return cantidadLibros + 1;
+        } else {
+            System.out.println("No hay espacio para más libros.");
+            return cantidadLibros;
+        }
+    }
 
-public String getTitulo(){
-    return this.titulo;
-}
+    public static int eliminarLibro(Libro[] libros, int cantidadLibros, String titulo) {
+        for (int i = 0; i < cantidadLibros; i++) {
+            if (libros[i].getTitulo().equalsIgnoreCase(titulo)) {
+                System.out.println("Libro eliminado: " + libros[i].getTitulo());
+                for (int j = i; j < cantidadLibros - 1; j++) {
+                    libros[j] = libros[j + 1];
+                }
+                libros[cantidadLibros - 1] = null;
+                return cantidadLibros - 1;
+            }
+        }
+        System.out.println("Libro no encontrado: " + titulo);
+        return cantidadLibros;
+    }
 
-public String getAutor(){
-    return this.autor;
-}
+    public static void buscarLibro(Libro[] libros, String criterio) {
+        for (Libro libro : libros) {
+            if (libro.getTitulo().equalsIgnoreCase(criterio) ||
+                libro.getAutor().equalsIgnoreCase(criterio) ||
+                libro.getCategoria().equalsIgnoreCase(criterio)) {
+                System.out.println("Encontrado: " + libro.getTitulo() + " - " + libro.getAutor());
+            }
+        }
+    }
 
-public String getCategoria(){
-    return this.categoria;
-}
-
-
-
-/*SETTERS */
-
-public void setTitulo(String titulo){
-    this.titulo=titulo;
-}
-
-public void setAutor(String autor){
-    this.autor=autor;
-}
-
-public void setCategoria(String categoria){
-    this.categoria=categoria;
-}
-
-
-
-/*MOSTRAR LIBROS */
-@Override
-public String toString(){
-    return "Titulo: " + titulo + ", Autor: " + autor + ", Categoria: " + categoria;}
-   
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public static void mostrarLibros(Libro[] libros, int cantidadLibros) {
+        for (int i = 0; i < cantidadLibros; i++) {
+            System.out.println(libros[i].getTitulo() + " - " + libros[i].getAutor() +
+                               " (" + (libros[i].isDisponible() ? "Disponible" : "Prestado") + ")");
+       }
 }
 
 
-
-
-
-
+}				
