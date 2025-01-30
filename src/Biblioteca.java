@@ -1,23 +1,23 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+/**
+ * 
+ * @autor Ronic Diego
+ */
+
 public class Biblioteca {
-    /*Atributos */
-    private Libro[]Libros;
-    private Usuario[]Usuario;
+
+    private Libro[] Libros;
+    private Usuario[] Usuario;
     private int tamLibro=50;
     private int tamUsuario=50;
     private int contadorLibros;
  
-
-   /*CONTRUCTOR POR DEFECTO */
+    
     Biblioteca(){
         Libros= new Libro[tamLibro];
         Usuario= new Usuario[tamUsuario];
         contadorLibros=0;
-        
-
     }
 
     Biblioteca(int tamLibro, int tamUsuario){
@@ -26,8 +26,6 @@ public class Biblioteca {
         Libros=new Libro[tamLibro];
         Usuario=new Usuario[tamUsuario];
     }
-
-    
 
     public Libro[] getLibros(){
         return Libros;
@@ -44,8 +42,6 @@ public class Biblioteca {
     public int gettamUsuario(){
         return tamUsuario;
     }
-
-    
 
     public void setLibros(Libro[] libros){
         this.Libros=libros;
@@ -65,12 +61,7 @@ public class Biblioteca {
         Usuario= new Usuario[tamUsuario];
     }
 
-
-    
-
     public void agrearLibro(Libro libro){
-
-        
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca el titulo del libro: ");
         String titulo= sc.nextLine();
@@ -98,8 +89,6 @@ public class Biblioteca {
         }
 
         System.out.println("No hay espacio para agregar mas libros.");
-
-
     }
 
     public void eliminarLibro(String titulo){
@@ -121,39 +110,24 @@ public class Biblioteca {
         if(!encontrado){
             System.out.println("El libro " + titulo + "no se encontró en la colección ");
         }
-
-
-        
-        
-       
     }
 
     public void mostrarLibros(String titulo, String autor, String categoria){
+        boolean hayLibros= false;
 
-    boolean hayLibros= false;
-
-    System.out.println("Lista de libros: ");
-    for(int i=0; i<tamLibro;i++){
-        if(Libros[i] !=null){
-            System.out.println("Titulo: " + Libros[i].getTitulo());
-            System.out.println("Autor: " + Libros[i].getAutor());
-            System.out.println("Categoria " + Libros[i].getCategoria());
-            System.out.println("-------------------------------------");
-            hayLibros=true;
+        System.out.println("Lista de libros: ");
+        for(int i=0; i<tamLibro;i++){
+            if(Libros[i] !=null){
+                System.out.println("Titulo: " + Libros[i].getTitulo());
+                System.out.println("Autor: " + Libros[i].getAutor());
+                System.out.println("Categoria " + Libros[i].getCategoria());
+                System.out.println("-------------------------------------");
+                hayLibros=true;
+            }
+        }
+    
+        if(!hayLibros){
+            System.out.println("No hay libros en la colección");
         }
     }
-    
-    if(!hayLibros){
-        System.out.println("No hay libros en la colección");
-    }
-
-
-    }
-
 }
-
-
-   
-
-
-
